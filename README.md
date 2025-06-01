@@ -1,13 +1,13 @@
 # Take-Home Project
 
-## 🌟 Features
+## Features
 
-- **Quote Management**: Create, read, and list quotes with persistent storage
-- **AI Integration**: Generate inspirational quotes using OpenRouter AI models
-- **RESTful Design**: Clean, consistent API endpoints with proper HTTP status codes
-- **Auto Documentation**: Interactive API docs with Swagger UI and ReDoc
-- **Production Ready**: CORS support, error handling, and structured logging
-- **Async Support**: Built with async/await for high performance
+- You can create, read, and list quotes with persistent storage
+-  Generate your own quotes using OpenRouter AI models
+- REST API endpoints with proper HTTP status codes
+- Interactive API docs with Swagger UI and ReDoc
+- CORS support, error handling, and structured logging
+- Built with async/await for high performance
 
 ### Installation
 
@@ -44,14 +44,14 @@
 
    The API will be available at: `http://127.0.0.1:8000`
 
-## 📚 API Documentation
+## API Documentation
 
 Once the server is running, you can access the interactive API documentation:
 
 - **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - **ReDoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
-## 🔗 API Endpoints
+## API Endpoints
 
 ### Core Endpoints
 
@@ -70,7 +70,7 @@ Once the server is running, you can access the interactive API documentation:
 | `GET` | `/quotes/{id}` | Get quote by ID | 200/404 |
 | `POST` | `/quotes/generate` | Generate AI quote | 201 |
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### 1. Create a Quote
 
@@ -150,7 +150,7 @@ curl -X POST "http://127.0.0.1:8000/quotes/generate" \
 }
 ```
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 quotecrafter/
@@ -165,7 +165,7 @@ quotecrafter/
 └── README.md             # This file
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -177,7 +177,7 @@ quotecrafter/
 | `DEBUG` | `False` | Enable debug mode |
 | `CORS_ORIGINS` | `http://localhost:3000,http://localhost:8080` | Allowed CORS origins |
 
-## 🚨 Error Handling
+## Error Handling
 
 The API includes comprehensive error handling:
 
@@ -189,7 +189,4 @@ The API includes comprehensive error handling:
 - **503 Service Unavailable**: AI service not configured
 - **504 Gateway Timeout**: Request timeout
 
-## 📋 Known Limitations
-
-1. **In-Memory Storage**: Quotes are stored in memory and will be lost when the server restarts
-2. **Single Instance**: No database persistence or clustering support
+future fixes - quotes are are stored in memory and will be lost when the server restarts
