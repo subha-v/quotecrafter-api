@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 
 class OpenRouterService:
-    """Service for integrating with OpenRouter API for AI quote generation"""
     
     def __init__(self):
         self.api_key = os.getenv("OPENROUTER_API_KEY")
@@ -26,18 +25,6 @@ class OpenRouterService:
             logger.warning("OpenRouter API key not found. AI quote generation will not work.")
     
     async def generate_quote(self, topic: str) -> tuple[str, str]:
-        """
-        Generate a quote about the given topic using OpenRouter API
-        
-        Args:
-            topic: The topic for quote generation
-            
-        Returns:
-            tuple: (quote_content, quote_author)
-            
-        Raises:
-            HTTPException: If the API call fails or returns invalid data
-        """
         if not self.api_key:
             raise HTTPException(
                 status_code=503, 
@@ -109,7 +96,6 @@ class OpenRouterService:
         raise HTTPException(status_code=502, detail="Failed to generate quote after multiple attempts.")
     
     def _create_prompt(self, topic: str) -> str:
-        """Create a prompt for quote generation"""
         return f"""Generate an inspirational quote about "{topic}". 
         
 Please respond with ONLY the following format:
@@ -119,16 +105,6 @@ Author: [Author name or "Anonymous"]
 The quote should be meaningful, inspiring, and relevant to the topic "{topic}". Make it concise but impactful."""
     
     def _parse_response(self, data: dict, topic: str) -> tuple[str, str]:
-        """
-        Parse the OpenRouter API response to extract quote and author
-        
-        Args:
-            data: The JSON response from OpenRouter
-            topic: The original topic (used for fallback)
-            
-        Returns:
-            tuple: (quote_content, quote_author)
-        """
         try:
             content = data["choices"][0]["message"]["content"].strip()
             

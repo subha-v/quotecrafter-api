@@ -19,7 +19,6 @@ next_id = 1
 
 
 def create_quote_record(quote_data: QuoteCreate) -> Quote:
-    """Create a new quote record with auto-generated ID and timestamp"""
     global next_id
     
     quote = Quote(
@@ -43,14 +42,6 @@ def create_quote_record(quote_data: QuoteCreate) -> Quote:
     description="Create a new quote with author and content"
 )
 async def create_quote(quote_data: QuoteCreate) -> QuoteResponse:
-    """
-    Create a new quote.
-    
-    - **author**: The author of the quote (required)
-    - **content**: The quote content (required)
-    
-    Returns the created quote with auto-generated ID and timestamp.
-    """
     try:
         quote = create_quote_record(quote_data)
         return QuoteResponse(
@@ -72,11 +63,6 @@ async def create_quote(quote_data: QuoteCreate) -> QuoteResponse:
     description="Retrieve a list of all quotes"
 )
 async def list_quotes() -> QuoteListResponse:
-    """
-    Retrieve all quotes.
-    
-    Returns a list of all quotes in the system.
-    """
     quotes_list = list(quotes_db.values())
     return QuoteListResponse(
         success=True,
@@ -93,13 +79,6 @@ async def list_quotes() -> QuoteListResponse:
     description="Retrieve a specific quote by its ID"
 )
 async def get_quote(quote_id: int) -> QuoteResponse:
-    """
-    Retrieve a quote by ID.
-    
-    - **quote_id**: The ID of the quote to retrieve
-    
-    Returns the quote if found, otherwise returns 404 error.
-    """
     if quote_id not in quotes_db:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -122,14 +101,6 @@ async def get_quote(quote_id: int) -> QuoteResponse:
     description="Generate a quote using AI based on a topic"
 )
 async def generate_quote(request: GenerateQuoteRequest) -> QuoteResponse:
-    """
-    Generate a quote using AI.
-    
-    - **topic**: The topic for quote generation (required)
-    
-    Uses OpenRouter API to generate an inspirational quote about the given topic.
-    The generated quote is automatically saved to the quotes database.
-    """
     try:
         # Generate quote using AI service
         quote_content, quote_author = await ai_service.generate_quote(request.topic)
@@ -161,7 +132,6 @@ async def generate_quote(request: GenerateQuoteRequest) -> QuoteResponse:
     description="Check if the quotes service is running"
 )
 async def health_check():
-    """Health check endpoint"""
     return {
         "status": "healthy",
         "service": "quotes",

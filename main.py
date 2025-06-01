@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan events"""
     # Startup
     logger.info("Starting QuoteCrafter API...")
     logger.info(f"Debug mode: {os.getenv('DEBUG', 'False')}")
@@ -80,7 +79,6 @@ app.include_router(quotes.router)
 # Root endpoint
 @app.get("/", tags=["root"])
 async def root():
-    """Welcome endpoint"""
     return {
         "message": "Welcome to QuoteCrafter API!",
         "version": "1.0.0",
@@ -91,7 +89,6 @@ async def root():
 # Health check endpoint
 @app.get("/health", tags=["health"])
 async def health_check():
-    """Application health check"""
     return {
         "status": "healthy",
         "service": "QuoteCrafter API",
